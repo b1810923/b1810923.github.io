@@ -1,26 +1,18 @@
 <html>
   <head>
-    <title>11:40</title>
+    <title>43</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-facebook-login-component/dist/vueFacebookLoginComponent.umd.min.js"></script>
+    <script type="module" src="main.js"></script>
   </head>
   <body>
 <div id="app">
   <v-facebook-login app-id="1706489239614542"></v-facebook-login>
 </div>
-<script type="module">
-  import Vue from 'vue'
-  import VFacebookLogin from 'vue-facebook-login-component'
-
-  export default {
-    components: {
-      VFacebookLogin
-    }
-  }
-
-// var app = new Vue({
-//   el:"#app"
-// })
+<script>
+var app = new Vue({
+  el:"#app"
+})
 </script>
   </body>
 </html>
