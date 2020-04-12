@@ -7872,6 +7872,11 @@ vue-eslint-parser@^7.0.0:
     esquery "^1.0.1"
     lodash "^4.17.15"
 
+vue-facebook-login-component@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/vue-facebook-login-component/-/vue-facebook-login-component-2.2.1.tgz#b5bc2b4fd90a808c3d7a83cf63ffbca3b1f18df5"
+  integrity sha512-UtB5/BzDayiie5PxUYz2YGH1FtdusiIpvQf/36PSVoDbUgXNGD0be4a+e9+8vmFXb4oa+Me2kvDYAslpSNwdcw==
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"

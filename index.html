@@ -1,6 +1,25 @@
 <html>
-  <head>test</head>
+  <head>
+    <title>Vue Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-facebook-login-component/dist/vueFacebookLoginComponent.umd.min.js"></script>
+  </head>
   <body>
-test><
+<div id="app">
+  {{message}}
+  <v-facebook-login app-id="1706489239614542"></v-facebook-login>
+</div>
+<script>
+  import VFacebookLogin from 'vue-facebook-login-component'
+var app = new Vue({
+  el:"#app",
+  data:{
+    message:'SSN Fighting!'
+  },
+  components: {
+    VFacebookLogin
+  }
+})
+</script>
   </body>
 </html>
