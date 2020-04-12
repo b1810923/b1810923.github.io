@@ -7,14 +7,16 @@
   <body>
 <div id="app">
   {{message}}
-  <v-facebook-login app-id="1706489239614542"></v-facebook-login>
+  <v-facebook-login app-id="1706489239614542g"></v-facebook-login>
 </div>
-<script>
+<script type="module">
   import VFacebookLogin from 'vue-facebook-login-component'
-var app = new Vue({
+</script>
+<script>
+  var app = new Vue({
   el:"#app",
   data:{
-    message:'SSN Fighting!'
+    message:'SSN Fighting!10:30'
   },
   components: {
     VFacebookLogin
