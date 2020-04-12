@@ -8,18 +8,20 @@
 <div id="app">
   {{message}}
   <!-- <v-facebook-login app-id=""></v-facebook-login> -->
-  <VFacebookLogin app-id="1706489239614542" />
+  <v-facebook-login app-id="1706489239614542"></v-facebook-login>
 </div>
 <script>
-  // import VFacebookLogin from 'vue-facebook-login-component'
-  const VFacebookLogin = require('vue-facebook-login-component');
-  var app = new Vue({
+  import VFacebookLogin from 'vue-facebook-login-component'
+
+  export default {
+    components: {
+      VFacebookLogin
+    }
+  }  
+var app = new Vue({
   el:"#app",
   data:{
-    message:'SSN Fighting!10:57'
-  },
-  components: {
-    VFacebookLogin
+    message:'SSN Fighting!11:05'
   }
 })
 </script>
