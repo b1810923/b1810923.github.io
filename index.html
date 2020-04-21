@@ -89,27 +89,65 @@ let vue = new Vue({
     deleteItem(todoType, index){ 
       switch(todoType){
         case 'incomplete-tasks':
+        console.log('Delete incomplete tasks:', todoType, index);
+        console.log(this.todolist);
+        console.log(this.completedlist);
+        console.log('start delete todolist 4:30');
           this.todolist.splice(index, 1); 
+        console.log(this.todolist);
+        console.log(this.completedlist);
+        console.log('end delete');
           break;
         case 'completed-tasks': 
         default: 
+        console.log('Delete complete tasks:', todoType, index);
+        console.log(this.todolist);
+        console.log(this.completedlist);
+        console.log('start delete completed 4:30');
           this.completedlist.splice(index, 1);
+          console.log(this.todolist);
+        console.log(this.completedlist);
+        console.log('end delete');
           break;
       }
     },
     removeTodoList(event){
       const index = event.target.closest('li').dataset.index;
       const todoType = event.target.closest('ul').id;
+      console.log('removeTodoList:', todoType, index);
+      console.log(this.todolist);
+      console.log(this.completedlist);
+      console.log('start move ======== 04:19');
+
       let moveItem = new Object();
-      
       if (todoType=='incomplete-tasks'){
+        
+      
         moveItem.check = true;
-        moveItem.item = this.todolist[index].item;
+        moveItem.item = JSON.parse(JSON.stringify(this.todolist[index].item));
+        //moveItem.item = this.todolist[index].item;
+        console.log('move obj:',moveItem);
+        console.log('incomplete check origin data ');
+        console.log(this.todolist);
+        console.log(this.completedlist);
+        console.log('start push ========');
         this.completedlist.push(moveItem);
+        console.log(this.todolist);
+        console.log(this.completedlist);
+        console.log('end push ========');
       } else {
+      
         moveItem.check = false;
-        moveItem.item = this.completedlist[index].item;
+        moveItem.item = JSON.parse(JSON.stringify(this.completedlist[index].item));
+        //moveItem.item = this.completedlist[index].item;
+        console.log('move obj:',moveItem);
+        console.log('completed check origin data ');
+        console.log(this.todolist);
+        console.log(this.completedlist);
+        console.log('start push ========');
         this.todolist.push(moveItem);
+        
+        console.log('end push ========');
       }
       this.deleteItem(todoType, index);
     }
