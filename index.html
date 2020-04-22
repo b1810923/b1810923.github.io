@@ -14,17 +14,17 @@
     </p>
     <h3>Todo</h3>
     <ul id="incomplete-tasks">
-      <todoitem v-for="(todolist,index) in todolist" :key="(todolist.item+index)" :todolist="todolist" :li-index="index" @delete-todo="deleteTodoItem" @remove-todo="removeTodoList"></todoitem>
+      <todoitem v-for="(todolist,index) in todolist" :key="(todolist.id)" :todolist="todolist" :li-index="index" @delete-todo="deleteTodoItem" @remove-todo="removeTodoList"></todoitem>
     </ul>
     <h3>Completed</h3>
     <ul id="completed-tasks">
-      <todoitem v-for="(todolist,index) in completedlist" :key="(todolist.item+index)" :todolist="todolist" :li-index="index" @delete-todo="deleteTodoItem" @remove-todo="removeTodoList"></todoitem>
+      <todoitem v-for="(todolist,index) in completedlist" :key="(todolist.id)" :todolist="todolist" :li-index="index" @delete-todo="deleteTodoItem" @remove-todo="removeTodoList"></todoitem>
     </ul>
   </div>
 <script>
 Vue.component('todoitem',{
   template:`<li :data-index="liIndex">
-              <input type="checkbox" :checked="todolist.check" @click="removeItem">
+              <input type="checkbox" v-model="todolist.check" @click="removeItem">
               <label>{{todolist.item}}</label>
               <button class="delete" @click="deleteItem">Delete</button>
             </li>`,
@@ -44,31 +44,40 @@ Vue.component('todoitem',{
 let vue = new Vue({
   el:"#app",
   data:{
-    text:'我們曉得萬事都互相效力，叫愛神的人得益處，就是按他旨意被召的人。(羅馬書 8:28)',
+    text:'人有見識就不輕易發怒，寬恕人的過失便是自己的榮耀。(箴19:11)',
     todolist:[],
-    completedlist:[]
+    completedlist:[],
+    fixed:0
   },
   created(){
     let completed = new Object();
-    completed.check =true;
+    completed.id = 1;
+    completed.check ='checked';
     completed.item = "買衛生紙";
     this.completedlist.push(completed);
-
+    this.fixed++;
     let todolist = new Object();
-    todolist.check = false;
+    todolist.id = 2;
+    todolist.check = '';
     todolist.item = "付信用卡費";
     this.todolist.push(todolist);
+    this.fixed++;
     let todolistItemTwo = new Object();
-    todolistItemTwo.check = false;
+    todolistItemTwo.id = 3;
+    todolistItemTwo.check = '';
     todolistItemTwo.item = "還書";
     this.todolist.push(todolistItemTwo);
+    this.fixed++;
+
   },
   methods:{
     addTodoItem() {
       let input = document.getElementById('new-task');
       if(input.value.trim()){
+        this.fixed++;
         let newTodoItem = new Object();
-        newTodoItem.check = false;
+        newTodoItem.id = this.fixed;
+        newTodoItem.check = '';
         newTodoItem.item = input.value.trim();
         this.todolist.push(newTodoItem);
         input.value = ''; 
@@ -123,7 +132,7 @@ let vue = new Vue({
       if (todoType=='incomplete-tasks'){
         
       
-        moveItem.check = true;
+        moveItem.check = 'checked';
         moveItem.item = JSON.parse(JSON.stringify(this.todolist[index].item));
         //moveItem.item = this.todolist[index].item;
         // console.log('move obj:',moveItem);
@@ -137,7 +146,7 @@ let vue = new Vue({
         // console.log('end push ========');
       } else {
       
-        moveItem.check = false;
+        moveItem.check = '';
         moveItem.item = JSON.parse(JSON.stringify(this.completedlist[index].item));
         //moveItem.item = this.completedlist[index].item;
         // console.log('move obj:',moveItem);
