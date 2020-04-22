@@ -76,7 +76,6 @@ let vue = new Vue({
       if(input.value.trim()){
         this.fixed++;
         let newTodoItem = new Object();
-        newTodoItem.id = this.fixed;
         newTodoItem.check = '';
         newTodoItem.item = input.value.trim();
         this.todolist.push(newTodoItem);
@@ -131,7 +130,7 @@ let vue = new Vue({
       let moveItem = new Object();
       if (todoType=='incomplete-tasks'){
         
-      
+        moveItem.label = this.todolist[index].label;
         moveItem.check = 'checked';
         moveItem.item = JSON.parse(JSON.stringify(this.todolist[index].item));
         //moveItem.item = this.todolist[index].item;
@@ -145,7 +144,7 @@ let vue = new Vue({
         // console.log(this.completedlist);
         // console.log('end push ========');
       } else {
-      
+        moveItem.label = this.todolist[index].label;
         moveItem.check = '';
         moveItem.item = JSON.parse(JSON.stringify(this.completedlist[index].item));
         //moveItem.item = this.completedlist[index].item;
