@@ -144,7 +144,7 @@ let vue = new Vue({
         // console.log(this.completedlist);
         // console.log('end push ========');
       } else {
-        moveItem.label = this.todolist[index].label;
+        moveItem.label = this.completedlist[index].label;
         moveItem.check = '';
         moveItem.item = JSON.parse(JSON.stringify(this.completedlist[index].item));
         //moveItem.item = this.completedlist[index].item;
