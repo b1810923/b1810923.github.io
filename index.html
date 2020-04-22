@@ -44,7 +44,7 @@ Vue.component('todoitem',{
 let vue = new Vue({
   el:"#app",
   data:{
-    text:'人有見識就不輕易發怒，寬恕人的過失便是自己的榮耀。(箴19:11...)',
+    text:'人有見識就不輕易發怒，寬恕人的過失便是自己的榮耀。(箴19:11)',
     todolist:[],
     completedlist:[],
     fixed:0
@@ -76,6 +76,7 @@ let vue = new Vue({
       if(input.value.trim()){
         this.fixed++;
         let newTodoItem = new Object();
+        newTodoItem.label = this.fixed;
         newTodoItem.check = '';
         newTodoItem.item = input.value.trim();
         this.todolist.push(newTodoItem);
