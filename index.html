@@ -14,11 +14,11 @@
     </p>
     <h3>Todo</h3>
     <ul id="incomplete-tasks">
-      <todoitem v-for="(todolist,index) in todolist" :key="(todolist.id)" :todolist="todolist" :li-index="index" @delete-todo="deleteTodoItem" @remove-todo="removeTodoList"></todoitem>
+      <todoitem v-for="(todolist,index) in todolist" :key="todolist.label" :todolist="todolist" :li-index="index" @delete-todo="deleteTodoItem" @remove-todo="removeTodoList"></todoitem>
     </ul>
     <h3>Completed</h3>
     <ul id="completed-tasks">
-      <todoitem v-for="(todolist,index) in completedlist" :key="(todolist.id)" :todolist="todolist" :li-index="index" @delete-todo="deleteTodoItem" @remove-todo="removeTodoList"></todoitem>
+      <todoitem v-for="(todolist,index) in completedlist" :key="todolist.label" :todolist="todolist" :li-index="index" @delete-todo="deleteTodoItem" @remove-todo="removeTodoList"></todoitem>
     </ul>
   </div>
 <script>
@@ -51,19 +51,19 @@ let vue = new Vue({
   },
   created(){
     let completed = new Object();
-    completed.id = 1;
+    completed.label = 1;
     completed.check ='checked';
     completed.item = "買衛生紙";
     this.completedlist.push(completed);
     this.fixed++;
-    let todolist = new Object();
-    todolist.id = 2;
-    todolist.check = '';
-    todolist.item = "付信用卡費";
-    this.todolist.push(todolist);
+    let todolistItemOne = new Object();
+    todolistItemOne.label = 2;
+    todolistItemOne.check = '';
+    todolistItemOne.item = "付信用卡費";
+    this.todolist.push(todolistItemOne);
     this.fixed++;
     let todolistItemTwo = new Object();
-    todolistItemTwo.id = 3;
+    todolistItemTwo.label = 3;
     todolistItemTwo.check = '';
     todolistItemTwo.item = "還書";
     this.todolist.push(todolistItemTwo);
