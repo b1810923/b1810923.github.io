@@ -54,21 +54,20 @@
     let Index = Math.floor(Math.random()*25);
     const selectImg = new Image();
     selectImg.src = srcUrl[Index];
-    selectImg.addEventListener("load", ()=>{
-        $("#word").append($(selectImg));
-        const gifImg = new Image();
-        gifImg.src = "https://i.imgur.com/HaeZAhZ.gif";
-        gifImg.addEventListener("load", ()=>{
-            $("#ori").append($(gifImg));
-            $("#load").hide();
-            $("#ori").show();
-        });
-    })
+
+    const gifImg = new Image();
+    gifImg.src = "https://i.imgur.com/HaeZAhZ.gif";
+    gifImg.addEventListener("load", ()=>{
+        $("#ori").append($(gifImg));
+        $("#load").hide();
+        $("#ori").show();
+    });
+
     $(document).ready(function(){
-       $("#showPic").click(function(){
-           $("#ori").hide();
-           $("#word").show();
-       });
+        $("#showPic").click(function(){
+            $("#ori").hide();
+            window.location.href= selectImg.src;
+        });
     });
 </script>
 </body>
