@@ -9,7 +9,7 @@
 <body>
 <div id="showPic" class="container-fluid">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-12">
             <div id="load">
                 <img src="https://i.imgur.com/ui15PTR.gif">
             </div>
@@ -54,21 +54,31 @@
     let Index = Math.floor(Math.random()*25);
     const selectImg = new Image();
     selectImg.src = srcUrl[Index];
-
-    const gifImg = new Image();
-    gifImg.src = "https://i.imgur.com/HaeZAhZ.gif";
-    gifImg.addEventListener("load", ()=>{
-        $("#ori").append($(gifImg));
-        $("#load").hide();
-        $("#ori").show();
-    });
-
-    $(document).ready(function(){
-        $("#showPic").click(function(){
-            $("#ori").hide();
-            window.location.href= selectImg.src;
+    selectImg.addEventListener("load", ()=>{
+        $("#word").append($(selectImg));
+        const gifImg = new Image();
+        gifImg.src = "https://i.imgur.com/HaeZAhZ.gif";
+        gifImg.addEventListener("load", ()=>{
+            $("#ori").append($(gifImg));
+            $("#load").hide();
+            $("#ori").show();
         });
+    })
+    $(document).ready(function(){
+       $("#showPic").click(function(){
+           $("#ori").hide();
+           $("#word").show();
+       });
+
+       $("#word").click(function(){
+           var aLink = document.createElement("a");
+           aLink.href = selectImg.src;
+           aLink.download = "";
+           aLink.click();
+       });
     });
+
+
 </script>
 </body>
 </html>
