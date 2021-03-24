@@ -1,167 +1,75 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Todo App</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8">
+    <meta charset="UTF-8">
+    <title>Word</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
-  <div class="container" id="app">
-    <div>{{text}}</div>
-    <p>
-      <label for="new-task">Add Item</label>
-      <input id="new-task" type="text" v-on:keyup.13="addTodoItem">
-      <button @click="addTodoItem">Add</button>
-    </p>
-    <h3>Todo</h3>
-    <ul id="incomplete-tasks">
-      <todoitem v-for="(todolist,index) in todolist" :key="todolist.label" :todolist="todolist" :li-index="index" @delete-todo="deleteTodoItem" @remove-todo="removeTodoList"></todoitem>
-    </ul>
-    <h3>Completed</h3>
-    <ul id="completed-tasks">
-      <todoitem v-for="(todolist,index) in completedlist" :key="todolist.label" :todolist="todolist" :li-index="index" @delete-todo="deleteTodoItem" @remove-todo="removeTodoList"></todoitem>
-    </ul>
-  </div>
+<div id="showPic" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="load">
+                <img src="https://i.imgur.com/ui15PTR.gif">
+            </div>
+            <div id="ori" style="display: none;">
+            </div>
+            <div id="word" style="display: none;">
+            </div>
+        </div>
+    </div>
+
+</div>
 <script>
-Vue.component('todoitem',{
-  template:`<li :data-index="liIndex">
-              <input type="checkbox" v-model="todolist.check" @click="removeItem">
-              <label>{{todolist.item}}</label>
-              <button class="delete" @click="deleteItem">Delete</button>
-            </li>`,
-  props:{
-    liIndex:Number,
-    todolist:Object
-  },
-  methods:{
-    deleteItem(){
-      this.$emit('delete-todo' , event);
-    },
-    removeItem(){
-      this.$emit('remove-todo' , event);
-    }
-  }
-})
-let vue = new Vue({
-  el:"#app",
-  data:{
-    text:'人有見識就不輕易發怒，寬恕人的過失便是自己的榮耀。(箴19:11)',
-    todolist:[],
-    completedlist:[],
-    fixed:0
-  },
-  created(){
-    let completed = new Object();
-    completed.label = 1;
-    completed.check ='checked';
-    completed.item = "買衛生紙";
-    this.completedlist.push(completed);
-    this.fixed++;
-    let todolistItemOne = new Object();
-    todolistItemOne.label = 2;
-    todolistItemOne.check = '';
-    todolistItemOne.item = "付信用卡費";
-    this.todolist.push(todolistItemOne);
-    this.fixed++;
-    let todolistItemTwo = new Object();
-    todolistItemTwo.label = 3;
-    todolistItemTwo.check = '';
-    todolistItemTwo.item = "還書";
-    this.todolist.push(todolistItemTwo);
-    this.fixed++;
+    let srcUrl = [
+        "https://i.imgur.com/1qdOqWE.jpg",
+        "https://i.imgur.com/QYmGFEU.jpg",
+        "https://i.imgur.com/jtTSMMe.jpg",
+        "https://i.imgur.com/tyNMo4k.jpg",
+        "https://i.imgur.com/qlfKaVw.jpg",
+        "https://i.imgur.com/TgAZ6Bg.jpg",
+        "https://i.imgur.com/7Ieq5Di.jpg",
+        "https://i.imgur.com/k554lzH.jpg",
+        "https://i.imgur.com/lG3envE.jpg",
+        "https://i.imgur.com/NRFNPq7.jpg",
+        "https://i.imgur.com/mBOZDvr.jpg",
+        "https://i.imgur.com/UjyCUw6.jpg",
+        "https://i.imgur.com/N5BQwUt.jpg",
+        "https://i.imgur.com/eueyTdV.jpg",
+        "https://i.imgur.com/71hx1Yg.jpg",
+        "https://i.imgur.com/bCD3rVt.jpg",
+        "https://i.imgur.com/aEQILXn.jpg",
+        "https://i.imgur.com/jGZlZlO.jpg",
+        "https://i.imgur.com/CZ4esvK.jpg",
+        "https://i.imgur.com/GyPtrVc.jpg",
+        "https://i.imgur.com/icDqAdO.jpg",
+        "https://i.imgur.com/mmpuIJg.jpg",
+        "https://i.imgur.com/7mEZlQx.jpg",
+        "https://i.imgur.com/gFjdLGm.jpg",
+        "https://i.imgur.com/yecL18d.jpg",
+        "https://i.imgur.com/H7LKhoN.jpg"
+    ];
 
-  },
-  methods:{
-    addTodoItem() {
-      let input = document.getElementById('new-task');
-      if(input.value.trim()){
-        this.fixed++;
-        let newTodoItem = new Object();
-        newTodoItem.label = this.fixed;
-        newTodoItem.check = '';
-        newTodoItem.item = input.value.trim();
-        this.todolist.push(newTodoItem);
-        input.value = ''; 
-      }else{
-        alert('請輸入代辦事項');
-        return
-      }
-    },
-    deleteTodoItem(event){
-      const index = event.target.closest('li').dataset.index;
-      const todoType = event.target.closest('ul').id;
-      const isDelete = confirm('Do you want to delete this item ?')? true:false;
-      if(isDelete){
-        this.deleteItem(todoType, index);
-      }
-      
-    },
-    deleteItem(todoType, index){ 
-      switch(todoType){
-        case 'incomplete-tasks':
-        // console.log('Delete incomplete tasks:', todoType, index);
-        // console.log(this.todolist);
-        // console.log(this.completedlist);
-        // console.log('start delete todolist 4:30');
-          this.todolist.splice(index, 1); 
-        // console.log(this.todolist);
-        // console.log(this.completedlist);
-        // console.log('end delete');
-          break;
-        case 'completed-tasks': 
-        default: 
-        // console.log('Delete complete tasks:', todoType, index);
-        // console.log(this.todolist);
-        // console.log(this.completedlist);
-        // console.log('start delete completed 4:30');
-          this.completedlist.splice(index, 1);
-        //   console.log(this.todolist);
-        // console.log(this.completedlist);
-        // console.log('end delete');
-          break;
-      }
-    },
-    removeTodoList(event){
-      const index = event.target.closest('li').dataset.index;
-      const todoType = event.target.closest('ul').id;
-      // console.log('removeTodoList:', todoType, index);
-      // console.log(this.todolist);
-      // console.log(this.completedlist);
-      // console.log('start move ======== 04:19');
-
-      let moveItem = new Object();
-      if (todoType=='incomplete-tasks'){
-        
-        moveItem.label = this.todolist[index].label;
-        moveItem.check = 'checked';
-        moveItem.item = JSON.parse(JSON.stringify(this.todolist[index].item));
-        //moveItem.item = this.todolist[index].item;
-        // console.log('move obj:',moveItem);
-        // console.log('incomplete check origin data ');
-        // console.log(this.todolist);
-        // console.log(this.completedlist);
-        // console.log('start push ========');
-        this.completedlist.push(moveItem);
-        // console.log(this.todolist);
-        // console.log(this.completedlist);
-        // console.log('end push ========');
-      } else {
-        moveItem.label = this.completedlist[index].label;
-        moveItem.check = '';
-        moveItem.item = JSON.parse(JSON.stringify(this.completedlist[index].item));
-        //moveItem.item = this.completedlist[index].item;
-        // console.log('move obj:',moveItem);
-        // console.log('completed check origin data ');
-        // console.log(this.todolist);
-        // console.log(this.completedlist);
-        // console.log('start push ========');
-        this.todolist.push(moveItem);
-        
-        //console.log('end push ========');
-      }
-      this.deleteItem(todoType, index);
-    }
-  }
-})
+    let Index = Math.floor(Math.random()*25);
+    const selectImg = new Image();
+    selectImg.src = srcUrl[Index];
+    selectImg.addEventListener("load", ()=>{
+        $("#word").append($(selectImg));
+        const gifImg = new Image();
+        gifImg.src = "https://i.imgur.com/HaeZAhZ.gif";
+        gifImg.addEventListener("load", ()=>{
+            $("#ori").append($(gifImg));
+            $("#load").hide();
+            $("#ori").show();
+        });
+    })
+    $(document).ready(function(){
+       $("#showPic").click(function(){
+           $("#ori").hide();
+           $("#word").show();
+       });
+    });
 </script>
 </body>
 </html>
